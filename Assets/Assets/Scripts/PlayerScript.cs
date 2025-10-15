@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -77,7 +78,7 @@ public class PlayerScript : MonoBehaviour
     }
 
     //This gets called whenever you bump into another object, like a wall or coin.
-    private void OnCollisionEnter2D(Collision2D other)
+    public void OnCollisionEnter2D(Collision2D other)
     {
         //This checks to see if the thing you bumped into had the Hazard tag
         //If it does...
@@ -99,7 +100,18 @@ public class PlayerScript : MonoBehaviour
             //And then update the game's score text
             UpdateScore();
         }
+        door door = other.gameObject.GetComponent<door>();
+        if (door != null)
+        {
+            if (Score >= 1)
+            {
+                door.GetBumped();
+                Score--;
+                UpdateScore();
+            }
+        }
     }
+
 
     //This function updates the game's score text to show how many points you have
     //Even if your 'score' variable goes up, if you don't update the text the player doesn't know

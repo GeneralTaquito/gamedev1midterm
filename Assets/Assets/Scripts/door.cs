@@ -1,10 +1,12 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
-public class Door : MonoBehaviour
-
+public class door : MonoBehaviour
 {
-    void Update()
+    public void GetBumped()
     {
+       Destroy(gameObject);
     }
 }
